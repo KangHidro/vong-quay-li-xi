@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Vòng Quay Lì Xì - Kang</title>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="date=no">
+		<meta name="format-detection" content="address=no">
+        <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <script type="text/javascript" src="js/Winwheel.min.js"></script>
+        <!-- <script type="text/javascript" src="js/Winwheel.js"></script> -->
+        <script src="js/TweenMax.min.js"></script>
+        <!-- Need Winwheel.min.js to run on ios -->
+		<link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
+        <link rel="icon" href="img/fav.ico" type="image/x-icon">
+        
+        <meta property="og:title" content="Vòng quay lì xì - By Kang">
+        <meta property="og:description" content="Cách dễ dàng nhất để lì xì bạn bè ngày Tết!">
+        <meta property="og:url" content="http://vongquaylixi.cf">
+        <meta property="og:image" content="http://vongquaylixi.cf/img/vqlx.jpg">
+        <meta property="og:site_name" content="Vòng quay lì xì - By Kang">
+        <meta property="og:type" content="website">
+        <meta property="fb:app_id" content="2172902589641593">
+    </head>
+    <body style="background:#ffc8c4;margin:0" onload='showToastBox_K("VÒNG QUAY LÌ XÌ<br>Bấm để quay!")'>
+        <div align="center">
+            <div class="space_top"><h3 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: red">VÒNG QUAY LÌ XÌ - BY KANG</h2></div>
+		<br />
+        <table class="wheelTable" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <div align="center" style="z-index: 999; position: relative;">
+                    <svg class="wheelpegSVG" width="45px" height="70px" viewBox="0 0 45 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" text-rendering="optimizeSpeed">
+                <g><path class="peg" fill="#e91e63" d="M22.139,0C5.623,0-1.523,15.572,0.269,27.037c3.392,21.707,21.87,42.232,21.87,42.232 s18.478-20.525,21.87-42.232C45.801,15.572,38.623,0,22.139,0z" /></g>
+                </svg></div>
+
+                <td class="the_wheel clickable" align="center" valign="center"> <!-- 438x582 canvas 434x434-->
+                    <canvas class="wheel" id="canvas" width="605" height="605" onClick="toast.style.visibility='hidden';resetWheel();startSpin();playBGM();" data-responsiveMinWidth="610" data-responsiveScaleHeight="true" data-responsiveMargin="50">
+                        <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                    </canvas>
+                </td>
+            </tr>
+        </table>
+        <div class="toast" onclick="toast.style.visibility='hidden';resetWheel();startSpin();playBGM();"><p/></div>
+        <button onclick="showThele()" class="tos" title="Thể lệ vòng quay">Thể lệ vòng quay</button>
+        <script>function showThele() {showToast('THỂ LỆ<br>VÒNG QUAY<br><hr><font style="font-size: 28px;line-height: 33px;">01. Mỗi người có 03 lượt quay, lấy kết quả ở lần cao nhất.<br>02. Khi quay vào ô Nhân 2 thì người quay được quay thêm một lần nữa để tìm giá trị được nhân lên.<br>03. Khi quay vào ô Nhân 2 nhiều lần liên tiếp thì chỉ lấy lần nhân cuối cùng.<br><hr>Bấm để quay!</font>');}</script>
+
+        <script>
+		var theWheel=new Winwheel({outerRadius:300,innerRadius:100,textFontSize:32,textOrientation:"vertical",textAlignment:"outer",numSegments:21,textFontFamily:"Arial",textFillStyle:"white",strokeStyle:"white",lineWidth:4,responsive:!0,segments:[{fillStyle:"#cddc39",text:"10 K",tlt:200},{fillStyle:"#8bc34a",text:"20 K",tlt:300},{fillStyle:"#4caf50",text:"30 K",tlt:400},{fillStyle:"#009688",text:"40 K",tlt:500},{fillStyle:"#ffc107",text:"50 K",tlt:500},{fillStyle:"#ff9800",text:"60 K",tlt:250},{fillStyle:"#03a9f4",text:"NHÂN 2",tlt:100,textFontSize:18,textFillStyle:"#ffffff"},{fillStyle:"#cddc39",text:"70 K",tlt:200},{fillStyle:"#8bc34a",text:"80 K",tlt:150},{fillStyle:"#4caf50",text:"90 K",tlt:100},{fillStyle:"#009688",text:"100 K",tlt:50},{fillStyle:"#ff5722",text:"200 K",tlt:0},{fillStyle:"#f44336",text:"500 K",tlt:0},{fillStyle:"#4051b5",text:"NHÂN 2",tlt:100,textFontSize:18,textFillStyle:"#ffffff"},{fillStyle:"#cddc39",text:"10 K",tlt:200},{fillStyle:"#8bc34a",text:"20 K",tlt:300},{fillStyle:"#4caf50",text:"50 K",tlt:400},{fillStyle:"#009688",text:"100 K",tlt:50},{fillStyle:"#ffc107",text:"200 K",tlt:0},{fillStyle:"#ff9800",text:"500 K",tlt:0},{fillStyle:"#9c27b0",text:"NHÂN 2",tlt:100,textFontSize:18,textFillStyle:"#ffffff"}],animation:{type:"spinToStop",duration:10.3,spins:3,callbackFinished:alertPrize,callbackSound:playSound,soundTrigger:"pin"},pins:{number:21,fillStyle:"#ffeb3b",outerRadius:5,strokeStyle:"#ffeb3b",responsive:!0}});let audio=new Audio("sfx/tick.mp3");function playSound(){audio.pause(),audio.currentTime=0,audio.play()}let wheelPower=0,wheelSpinning=!1;function startSpin(){!1==wheelSpinning&&(theWheel.animation.spins=3,theWheel.startAnimation(),wheelSpinning=!0)}function resetWheel(){theWheel.stopAnimation(!1),theWheel.rotationAngle=0,theWheel.draw(),wheelSpinning=!1}function alertPrize(a){var b=500;"NH\xC2N 2"==a.text?(setTimeout(function(){showToastBox_K("Ch\xFAc m\u1EEBng!<br>B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n \u0111\xF4i!")},b),readRsl("Ch\xFAc m\u1EEBng! B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n \u0111\xF4i. B\u1EA5m \u0111\u1EC3 quay ti\u1EBFp!")):"NH\xC2N 3"==a.text?(setTimeout(function(){showToastBox_K("Ch\xFAc m\u1EEBng!<br>B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n ba!")},b),readRsl("Ch\xFAc m\u1EEBng! B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n ba. B\u1EA5m \u0111\u1EC3 quay ti\u1EBFp!")):"NH\xC2N 4"==a.text?(setTimeout(function(){showToastBox_K("Ch\xFAc m\u1EEBng!<br>B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n b\u1ED1n!")},b),readRsl("Ch\xFAc m\u1EEBng! B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c c\u01A1 h\u1ED9i nh\xE2n b\u1ED1n. B\u1EA5m \u0111\u1EC3 quay ti\u1EBFp!")):(setTimeout(function(){showToastBox_K("Ch\xFAc m\u1EEBng!<br>B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c "+a.text+"\u0111")},b),readRsl("Ch\xFAc m\u1EEBng! B\u1EA1n nh\u1EADn \u0111\u01B0\u1EE3c "+a.text+"%20\u0111\u1ED3ng"))}function playBGM(){let a=new Audio("sfx/bgm.mp3");a.pause(),a.currentTime=0,a.play()}function readRsl(a){let b=new Audio("http://translate.google.com.vn/translate_tts?ie=UTF-8&q="+a+"&tl=vi&client=tw-ob");b.pause(),b.currentTime=0,b.play()}function select(a){return document.querySelector(a)}function showToast(a){toast.style.visibility="visible",toast.style.backgroundColor="#E81D62",toastText.innerHTML=a,TweenMax.fromTo(toast,0.6,{y:20,alpha:0},{y:0,alpha:1,delay:0.2,ease:Elastic.easeOut.config(0.7,0.7)})}function showToastBox_K(a){toast=select(".toast"),toastText=select(".toast p"),toast.style.boxShadow="0px 0px 20px rgba(21,21,21,0.5)",TweenMax.set([toast],{xPercent:-50,left:"50%",top:"50%",yPercent:-50}),toast.style.backgroundColor="red",showToast(a)}function resizeCanvas(){var a=window.innerWidth>window.innerHeight?window.innerHeight:window.innerWidth,b=select(".wheel");b.width=a-100,b.height=a-100,theWheel.draw()}
+		</script>
+    </body>
+</html>

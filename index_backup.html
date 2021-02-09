@@ -1,0 +1,202 @@
+<html>
+    <head>
+        <title>Vòng Quay Lì Xì - Kang</title>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="date=no">
+		<meta name="format-detection" content="address=no">
+        <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <!-- <script type="text/javascript" src="js/Winwheel.min.js"></script> -->
+        <script type="text/javascript" src="js/Winwheel.js"></script>
+        <script src="js/TweenMax.min.js"></script>
+        <!-- Need Winwheel.min.js to run on ios -->
+		<link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
+		<link rel="icon" href="img/fav.ico" type="image/x-icon">
+    </head>
+    <body style="background:#ffc8c4;margin:0" onload='showToastBox_K("VÒNG QUAY LÌ XÌ<br>Bấm để quay!")'>
+        <div align="center">
+            <div class="space_top"></div>
+		<br />
+        <table class="wheelTable" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <div align="center" style="z-index: 999; position: relative;">
+                    <svg class="wheelpegSVG" width="45px" height="70px" viewBox="0 0 45 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" text-rendering="optimizeSpeed">
+                <g><path class="peg" fill="#e91e63" d="M22.139,0C5.623,0-1.523,15.572,0.269,27.037c3.392,21.707,21.87,42.232,21.87,42.232 s18.478-20.525,21.87-42.232C45.801,15.572,38.623,0,22.139,0z" /></g>
+                </svg></div>
+
+                <td class="the_wheel clickable" align="center" valign="center"> <!-- 438x582 canvas 434x434-->
+                    <canvas class="wheel" id="canvas" width="605" height="605" onClick="toast.style.visibility='hidden';resetWheel();startSpin();playBGM();" data-responsiveMinWidth="610" data-responsiveScaleHeight="true" data-responsiveMargin="50">
+                        <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                    </canvas>
+                </td>
+            </tr>
+        </table>
+        <div class="toast" onclick="toast.style.visibility='hidden';resetWheel();startSpin();playBGM();"><p/></div>
+        <script>
+		var theWheel = new Winwheel({
+    "outerRadius"     : 300,
+    "innerRadius"     : 100,
+    "textFontSize"    : 32,
+    "textOrientation" : "vertical",
+    "textAlignment"   : "outer",
+    "numSegments"     : 21,
+    "textFontFamily"  : "Arial",
+    "textFillStyle"   : "white",
+    "strokeStyle"	  : "white",
+    "lineWidth"		  : 4,
+    "responsive"	  : true,
+    "segments"        :
+    [
+       {"fillStyle" : "#cddc39", "text" : "10 K", "tlt": 200},
+       {"fillStyle" : "#8bc34a", "text" : "20 K", "tlt": 300},
+       {"fillStyle" : "#4caf50", "text" : "30 K", "tlt": 400},
+       {"fillStyle" : "#009688", "text" : "40 K", "tlt": 500},
+       {"fillStyle" : "#ffc107", "text" : "50 K", "tlt": 500},
+       {"fillStyle" : "#ff9800", "text" : "60 K", "tlt": 250},
+       {"fillStyle" : "#03a9f4", "text" : "NHÂN 2", "tlt": 100, "textFontSize" : 18, "textFillStyle" : "#ffffff"},
+       {"fillStyle" : "#cddc39", "text" : "70 K", "tlt": 200},
+       {"fillStyle" : "#8bc34a", "text" : "80 K", "tlt": 150},
+       {"fillStyle" : "#4caf50", "text" : "90 K", "tlt": 100},
+       {"fillStyle" : "#009688", "text" : "100 K", "tlt": 50},
+       {"fillStyle" : "#ff5722", "text" : "200 K", "tlt": 0},
+       {"fillStyle" : "#f44336", "text" : "500 K", "tlt": 0},
+       {"fillStyle" : "#4051b5", "text" : "NHÂN 2", "tlt": 100, "textFontSize" : 18, "textFillStyle" : "#ffffff"},
+       {"fillStyle" : "#cddc39", "text" : "10 K", "tlt": 200},
+       {"fillStyle" : "#8bc34a", "text" : "20 K", "tlt": 300},
+       {"fillStyle" : "#4caf50", "text" : "50 K", "tlt": 400},
+       {"fillStyle" : "#009688", "text" : "100 K", "tlt": 50},
+       {"fillStyle" : "#ffc107", "text" : "200 K", "tlt": 0},
+       {"fillStyle" : "#ff9800", "text" : "500 K", "tlt": 0},
+       {"fillStyle" : "#9c27b0", "text" : "NHÂN 2", "tlt": 100, "textFontSize" : 18, "textFillStyle" : "#ffffff"}
+    ],
+    "animation" :
+    {
+        "type"     : "spinToStop",
+        "duration" : 10.3,
+        "spins"    : 3,
+        "callbackFinished" : alertPrize,
+        "callbackSound"    : playSound,
+        "soundTrigger"     : "pin"
+    },
+    "pins" :
+    {
+        "number"     : 21,
+        "fillStyle"  : "#ffeb3b",
+        "outerRadius": 5,
+        "strokeStyle": "#ffeb3b",
+        "responsive" : true
+    }
+});
+
+let audio = new Audio("sfx/tick.mp3");
+
+function playSound()
+{
+    audio.pause();
+    audio.currentTime = 0;
+
+    audio.play();
+}
+
+let wheelPower    = 0;
+let wheelSpinning = false;
+
+function startSpin()
+{
+    if (wheelSpinning == false) {
+        theWheel.animation.spins = 3;
+
+        theWheel.startAnimation();
+
+        wheelSpinning = true;
+    }
+}
+
+function resetWheel()
+{
+    theWheel.stopAnimation(false);
+    theWheel.rotationAngle = 0;
+    theWheel.draw();
+
+    wheelSpinning = false;
+}
+
+function alertPrize(indicatedSegment)
+{
+    var sleep = 500;
+    if (indicatedSegment.text == "NHÂN 2") {
+        setTimeout(function(){ showToastBox_K("Chúc mừng!<br>Bạn nhận được cơ hội nhân đôi!"); }, sleep);
+        readRsl("Chúc mừng! Bạn nhận được cơ hội nhân đôi. Bấm để quay tiếp!");
+    }/* else if (indicatedSegment.text == "NHÂN 3") {
+        setTimeout(function(){ showToastBox_K("Chúc mừng!<br>Bạn nhận được cơ hội nhân ba!"); }, sleep);
+        readRsl("Chúc mừng! Bạn nhận được cơ hội nhân ba. Bấm để quay tiếp!");
+    } else if (indicatedSegment.text == "NHÂN 4") {
+        setTimeout(function(){ showToastBox_K("Chúc mừng!<br>Bạn nhận được cơ hội nhân bốn!"); }, sleep);
+        readRsl("Chúc mừng! Bạn nhận được cơ hội nhân bốn. Bấm để quay tiếp!");
+    }*/ else {
+        setTimeout(function(){ showToastBox_K("Chúc mừng!<br>Bạn nhận được " + indicatedSegment.text.replace(" ", "")); }, sleep);
+        readRsl("Chúc mừng! Bạn nhận được " + indicatedSegment.text);
+    }
+}
+
+function playBGM()
+{
+    let audio = new Audio("sfx/bgm.mp3");
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
+}
+
+function readRsl(rsl)
+{
+    let audio = new Audio("http://translate.google.com.vn/translate_tts?ie=UTF-8&q="+rsl+"&tl=vi&client=tw-ob");
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
+    
+}
+
+function select(s) { return document.querySelector(s); }
+
+function showToast(str) {
+    toast.style.visibility = "visible";
+    toast.style.backgroundColor = "#E81D62";
+    toastText.innerHTML = str;
+    TweenMax.fromTo(toast, 0.6, {
+        y: 20,
+        alpha: 0
+        }, {
+            y: 0,
+            alpha: 1,
+            delay: 0.2,
+            ease: Elastic.easeOut.config(0.7, 0.7)
+        })
+    }
+
+function showToastBox_K(text) {
+    toast = select(".toast");
+    toastText = select(".toast p");
+    toast.style.boxShadow = "0px 0px 20px rgba(21,21,21,0.5)";
+
+    TweenMax.set([toast], {
+        xPercent: -50,
+        left: "50%",
+        top: "50%",
+        yPercent: -50
+    });
+
+    toast.style.backgroundColor = "red";
+
+    showToast(text);
+    }
+    
+    function resizeCanvas() {
+        var Cvssize = (window.innerWidth > window.innerHeight) ? window.innerHeight : window.innerWidth;
+        var ctx = select(".wheel");
+            ctx.width  = Cvssize - 100;
+            ctx.height = Cvssize - 100;
+        theWheel.draw();
+    }
+		</script>
+    </body>
+</html>
